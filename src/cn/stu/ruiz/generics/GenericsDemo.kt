@@ -1,5 +1,10 @@
 package cn.stu.ruiz.generics
 
+import cn.stu.ruiz.clazz.AbstractClazza
+import cn.stu.ruiz.clazz.DerivedAbstractClazz
+import cn.stu.ruiz.dataclass.Person
+import cn.stu.ruiz.dataclass.Student
+
 fun main() {
 
     //一般来说，要创建这样类的实例，我们需要提供类型参数：
@@ -15,3 +20,35 @@ class Box<T>(t: T) {
 }
 
 
+interface Source<out T> {
+    fun next(): T
+}
+
+class DerivedSource : Source<AbstractClazza> {
+    override fun next(): AbstractClazza {
+        return DerivedAbstractClazz()
+    }
+}
+
+/**
+ * out安全是指在读取的时候尅使用基类来作为变量
+ * */
+
+fun outDemo(str: Source<DerivedAbstractClazz>) {
+    val b: Source<AbstractClazza> = str
+
+
+}
+
+interface Sourve<in T> {
+    fun set(a: T)
+}
+
+/**
+ * in的时候赋值可以赋值子类,
+ * */
+fun outDemo(str: Sourve<DerivedAbstractClazz>) {
+
+//    str.set(AbstractClazza())
+
+}
